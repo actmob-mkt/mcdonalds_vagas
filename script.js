@@ -22,9 +22,7 @@ const CONFIG = {
   termsUrl: 'termos-de-uso.html',                   // TROCAR
   socials: [                                        // Confirmar perfis oficiais
     { label: 'Instagram', icon: 'ph-instagram-logo', url: 'https://www.instagram.com/mcdonalds_br/' },
-    { label: 'Facebook', icon: 'ph-facebook-logo', url: 'https://www.facebook.com/McDonaldsBrasil' },
-    { label: 'TikTok', icon: 'ph-tiktok-logo', url: 'https://www.tiktok.com/@mcdonalds_br' },
-    { label: 'LinkedIn', icon: 'ph-linkedin-logo', url: 'https://www.linkedin.com/company/arcos-dorados/' }
+    { label: 'Facebook', icon: 'ph-facebook-logo', url: 'https://www.facebook.com/McDonaldsBrasil' }
   ]
 };
 

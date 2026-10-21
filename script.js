@@ -4,7 +4,7 @@
 /* =====================================================================
    DADOS EDITÁVEIS
    Tudo que precisa ser confirmado com o RH / franqueado antes de publicar
-   está aqui no topo: configurações, benefícios, vagas, lojas, etapas,
+   está aqui no topo: configurações, benefícios, áreas, lojas, etapas,
    depoimentos e FAQ.
    ===================================================================== */
 
@@ -50,6 +50,13 @@ const AREAS = [
 ];
 
 // Cidades com lojas (ordem de exibição)
+const REGIOES = [
+  { id: 'alto-tiete', label: 'Alto Tietê' },
+  { id: 'bertioga', label: 'Bertioga' }
+];
+const regiaoDe = cidade => cidade === 'Bertioga' ? 'bertioga' : 'alto-tiete';
+const regiaoLabel = id => (REGIOES.find(r => r.id === id) || {}).label || id;
+
 const CIDADES = ['Mogi das Cruzes', 'Suzano', 'Itaquaquecetuba', 'Poá', 'Ferraz de Vasconcelos', 'Arujá', 'Bertioga'];
 
 // Fonte: planilha Dados_Rest_RCP_RPG_GCP (aba Restaurantes).
@@ -72,26 +79,10 @@ const LOJAS = [
   { sigla: 'RIV', maps: 'https://maps.app.goo.gl/spLtyNNNW3DC6hALA', nome: 'Riviera', tipo: 'Drive-Thru', cidade: 'Bertioga', endereco: 'Rua Aprovada, 399, N. 37, Riviera de São Lourenço, 11250-000', inauguracao: '2008-12-15', status: 'aberta' }
 ];
 
-// area deve usar um id de AREAS. loja deve ser o nome exato de uma loja em LOJAS. data: AAAA-MM-DD.
-const VAGAS = [
-  { id: 'v01', titulo: 'Atendente de restaurante', area: 'atendimento', cidade: 'Mogi das Cruzes', loja: 'Mogi Centro Drive', turno: 'Manhã ou tarde', regime: 'CLT · 6x1 · 44h semanais', descricao: 'Recepção de clientes, caixa e entrega de pedidos no balcão e no drive.', data: '2026-10-14' },
-  { id: 'v02', titulo: 'Atendente de cozinha', area: 'cozinha', cidade: 'Mogi das Cruzes', loja: 'Mogi Shopping', turno: 'Tarde e noite', regime: 'CLT · Meio período', descricao: 'Preparo de sanduíches e acompanhamentos seguindo os padrões de qualidade.', data: '2026-10-11' },
-  { id: 'v03', titulo: 'Gerente de turno', area: 'lideranca', cidade: 'Mogi das Cruzes', loja: 'Mogi Braz Cubas', turno: 'Escala rotativa', regime: 'CLT · 44h semanais', descricao: 'Coordena a equipe do turno, garante metas de serviço e apoia treinamentos.', data: '2026-10-08' },
-  { id: 'v12', titulo: 'Equipe de inauguração', area: 'atendimento', cidade: 'Mogi das Cruzes', loja: 'Mogi Mogilar', turno: 'Escala a definir', regime: 'CLT · 44h semanais', descricao: 'Vagas para a nova loja, com treinamento completo antes da abertura em dezembro.', data: '2026-10-18' },
-  { id: 'v04', titulo: 'Atendente McCafé', area: 'mccafe', cidade: 'Suzano', loja: 'Suzano Shopping', turno: 'Manhã', regime: 'CLT · Meio período', descricao: 'Preparo de cafés, bebidas e sobremesas no balcão McCafé.', data: '2026-10-15' },
-  { id: 'v05', titulo: 'Treinador de equipe', area: 'lideranca', cidade: 'Suzano', loja: 'Suzano Drive', turno: 'Tarde', regime: 'CLT · 44h semanais', descricao: 'Acompanha novos colaboradores e garante o padrão de atendimento.', data: '2026-10-02' },
-  { id: 'v06', titulo: 'Jovem Aprendiz', area: 'aprendiz', cidade: 'Poá', loja: 'Poá Drive', turno: 'Manhã ou tarde, conforme escola', regime: 'Aprendiz · 4h a 6h diárias', descricao: 'Para quem tem de 14 a 24 anos e está estudando. Inclui curso de formação.', data: '2026-10-16' },
-  { id: 'v07', titulo: 'Jovem Aprendiz', area: 'aprendiz', cidade: 'Ferraz de Vasconcelos', loja: 'Ferraz Drive', turno: 'Tarde', regime: 'Aprendiz · 4h a 6h diárias', descricao: 'Primeira experiência com carteira assinada e curso de formação profissional.', data: '2026-10-09' },
-  { id: 'v08', titulo: 'Atendente de cozinha', area: 'cozinha', cidade: 'Itaquaquecetuba', loja: 'Itaquá Drive', turno: 'Noite e madrugada', regime: 'CLT · 6x1 · Adicional noturno', descricao: 'Produção na cozinha para o atendimento 24 horas do drive.', data: '2026-10-13' },
-  { id: 'v10', titulo: 'Atendente de restaurante', area: 'atendimento', cidade: 'Itaquaquecetuba', loja: 'Outlet Grande São Paulo', turno: 'Fins de semana', regime: 'CLT · Intermitente', descricao: 'Atendimento no salão e no caixa aos sábados, domingos e feriados.', data: '2026-10-06' },
-  { id: 'v09', titulo: 'Atendente McDelivery', area: 'mcdelivery', cidade: 'Arujá', loja: 'Arujá Drive', turno: 'Tarde e noite', regime: 'CLT · 6x1', descricao: 'Organiza e confere pedidos de delivery e faz a entrega aos parceiros.', data: '2026-10-12' },
-  { id: 'v11', titulo: 'Atendente de restaurante', area: 'atendimento', cidade: 'Mogi das Cruzes', loja: 'Mogi Ipoema', turno: 'Manhã', regime: 'CLT · Meio período', descricao: 'Caixa, montagem de bandejas e atendimento no totem de autoatendimento.', data: '2026-10-17' }
-];
-
 const PROCESSO = [
   { titulo: 'Cadastro online', texto: 'Preencha o formulário desta página pelo celular. Leva cerca de 3 minutos.', prazo: 'Hoje' },
-  { titulo: 'Contato pelo WhatsApp', texto: 'O RH confere seu perfil e chama você para combinar a entrevista.', prazo: 'Até 7 dias úteis' },
-  { titulo: 'Entrevista na loja', texto: 'Uma conversa com a gerência da loja mais próxima. Não precisa de roupa formal.', prazo: 'Cerca de 30 minutos' },
+  { titulo: 'Banco de talentos', texto: 'Seu currículo fica guardado na cidade escolhida. Quando abrir uma oportunidade com seu perfil, o RH chama você pelo WhatsApp.', prazo: 'Conforme as oportunidades' },
+  { titulo: 'Entrevista na loja', texto: 'Uma conversa com a gerência da loja da cidade escolhida. Não precisa de roupa formal.', prazo: 'Cerca de 30 minutos' },
   { titulo: 'Integração e treinamento', texto: 'Exame admissional, documentos e seu primeiro turno acompanhado por um treinador.', prazo: 'Primeira semana' }
 ];
 
@@ -105,29 +96,22 @@ const DEPOIMENTOS = [
 
 const FAQ = [
   { pergunta: 'Qual a idade mínima para trabalhar no McDonald’s?', resposta: 'A partir de 14 anos pelo programa Jovem Aprendiz, para quem está estudando. Para vagas CLT de atendimento e cozinha, a partir de 16 anos, e 18 anos para turnos noturnos.' },
-  { pergunta: 'Preciso ter experiência?', resposta: 'Não. Para atendimento, cozinha, McCafé, McDelivery e Jovem Aprendiz você aprende tudo no treinamento. Vagas de liderança pedem experiência prévia.' },
-  { pergunta: 'Posso trabalhar e estudar?', resposta: 'Sim. A escala é combinada com a loja para respeitar seus horários de aula. Conte sua disponibilidade no formulário.' },
-  { pergunta: 'Posso escolher em qual loja vou trabalhar?', resposta: 'Você indica sua cidade e bairro, e o RH prioriza a loja mais próxima da sua casa sempre que houver vaga.' },
-  { pergunta: 'Em quanto tempo recebo retorno?', resposta: 'Normalmente em até 7 dias úteis pelo WhatsApp informado. Se não houver vaga para seu perfil agora, seu cadastro fica no banco de talentos.' },
-  { pergunta: 'Preciso enviar currículo?', resposta: 'Não é obrigatório. Se tiver, pode anexar em PDF ou Word. Os dados do formulário já bastam para começar.' },
+  { pergunta: 'Preciso ter experiência?', resposta: 'Não. Para atendimento, cozinha, McCafé, McDelivery e Jovem Aprendiz você aprende tudo no treinamento. Liderança pede experiência prévia.' },
+  { pergunta: 'Posso trabalhar e estudar?', resposta: 'Sim. A escala é combinada com a loja para respeitar seus horários de aula. Combine seus horários na entrevista.' },
+  { pergunta: 'Posso escolher em qual loja vou trabalhar?', resposta: 'Você escolhe a região onde quer trabalhar. O RH prioriza a loja mais próxima da sua casa.' },
+  { pergunta: 'Quando vou ser chamado?', resposta: 'Seu currículo fica no banco de talentos da região escolhida. Quando abrir uma oportunidade com o seu perfil, o RH chama você pelo WhatsApp informado.' },
+  { pergunta: 'Preciso anexar o arquivo do currículo?', resposta: 'Não é obrigatório. Se tiver, pode anexar em PDF ou Word. Os dados do formulário já valem como seu cadastro.' },
+  { pergunta: 'Posso me cadastrar nas duas regiões?', resposta: 'Sim. Faça um cadastro para cada região onde você teria interesse em trabalhar.' },
   { pergunta: 'O processo seletivo tem algum custo?', resposta: 'Nenhum. O McDonald’s nunca cobra taxas, cursos ou exames para contratar. Se alguém pedir pagamento, é golpe: avise o RH.' },
-  { pergunta: 'Como meus dados são usados?', resposta: 'Seus dados são usados só para este processo seletivo, conforme a LGPD. Você pode pedir acesso, correção ou exclusão pelo e-mail de privacidade no rodapé.' }
+  { pergunta: 'Como meus dados são usados?', resposta: 'Seus dados são usados só para o banco de talentos e processos seletivos, conforme a LGPD. Você pode pedir acesso, correção ou exclusão pelo e-mail de privacidade no rodapé.' }
 ];
 
 const TAGLINE = 'Aqui o primeiro turno é só o começo. Tem gente que entrou como atendente e hoje gerencia a loja.';
 
-const DISPONIBILIDADE = [
-  { id: 'manha', label: 'Manhã' },
-  { id: 'tarde', label: 'Tarde' },
-  { id: 'noite', label: 'Noite' },
-  { id: 'madrugada', label: 'Madrugada' },
-  { id: 'fds', label: 'Fins de semana' }
-];
-
 /* ===================================================================== */
 
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
-const NAV = [['#beneficios', 'Benefícios'], ['#lojas', 'Lojas'], ['#vagas', 'Vagas'], ['#processo', 'Processo'], ['#depoimentos', 'Depoimentos'], ['#faq', 'FAQ']];
+const NAV = [['#beneficios', 'Benefícios'], ['#lojas', 'Lojas'], ['#processo', 'Processo'], ['#depoimentos', 'Depoimentos'], ['#faq', 'FAQ']];
 
 function maskPhone(v) {
   const d = v.replace(/\D/g, '').slice(0, 11);
@@ -150,7 +134,7 @@ function validar(f, file) {
   const e = {};
   if (f.nome.trim().split(/\s+/).filter(Boolean).length < 2) e.nome = 'Escreva seu nome e sobrenome.';
   if (!f.nascimento) e.nascimento = 'Informe sua data de nascimento.';
-  else { const a = idade(f.nascimento); if (a < 14) e.nascimento = 'As vagas começam a partir de 14 anos, pelo Jovem Aprendiz.'; else if (a > 90 || isNaN(a)) e.nascimento = 'Confira a data informada.'; }
+  else { const a = idade(f.nascimento); if (a < 14) e.nascimento = 'O cadastro é a partir de 14 anos, pelo Jovem Aprendiz.'; else if (a > 90 || isNaN(a)) e.nascimento = 'Confira a data informada.'; }
   const d = f.whatsapp.replace(/\D/g, '');
   if (d.length !== 11 || d[2] !== '9') e.whatsapp = 'Use DDD e número de celular, como (11) 91234-5678.';
   const r = f.recado.replace(/\D/g, '');
@@ -158,17 +142,17 @@ function validar(f, file) {
   else if (r && r === d) e.recado = 'Informe um número diferente do seu.';
   if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) e.email = 'Esse e-mail parece incompleto. Confira, por favor.';
   if (f.cep.replace(/\D/g, '').length !== 8) e.cep = 'Informe os 8 números do CEP.';
-  if (!f.cidade) e.cidade = 'Escolha sua cidade.';
+  if (!f.cidade.trim()) e.cidade = 'Informe a cidade onde você mora.';
+  if (!f.regiao) e.regiao = 'Escolha a região onde quer trabalhar.';
+  if (!f.area) e.area = 'Escolha uma área de interesse.';
   if (!f.bairro.trim()) e.bairro = 'Informe seu bairro para acharmos a loja mais perto.';
   if (!f.rua.trim()) e.rua = 'Informe a rua ou avenida.';
   if (!f.numero.trim()) e.numero = 'Informe o número (ou s/n).';
-  if (!f.vaga) e.vaga = 'Escolha uma vaga ou o banco de talentos.';
-  if (!f.disp.length) e.disp = 'Marque pelo menos um horário.';
   if (file && file.size > 5 * 1024 * 1024) e.arquivo = 'O arquivo passou de 5 MB. Tente um PDF menor.';
-  if (!f.lgpd) e.lgpd = 'Precisamos da sua autorização para analisar a candidatura.';
+  if (!f.lgpd) e.lgpd = 'Precisamos da sua autorização para guardar seu cadastro.';
   return e;
 }
-const ORDER = ['nome', 'nascimento', 'whatsapp', 'recado', 'recadoNome', 'email', 'cep', 'cidade', 'bairro', 'rua', 'numero', 'complemento', 'vaga', 'disp', 'arquivo', 'lgpd'];
+const ORDER = ['nome', 'nascimento', 'whatsapp', 'recado', 'recadoNome', 'email', 'cep', 'cidade', 'bairro', 'rua', 'numero', 'complemento', 'regiao', 'area', 'arquivo', 'lgpd'];
 
 
 /* =====================================================================
@@ -179,11 +163,9 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const areaLabel = id => (AREAS.find(a => a.id === id) || {}).label || id;
-const fmtData = iso => { const [, m, d] = iso.split('-'); return +d + ' ' + MESES[+m - 1]; };
-const lojaDe = nome => LOJAS.find(l => l.nome === nome) || {};
 const fotoLoja = l => l.foto || 'assets/fachada-' + (l.sigla || 'loja').toLowerCase() + '.jpg';
 
-const state = { filtroCidade: '', filtroArea: '', submitted: false, touched: {}, file: null };
+const state = { submitted: false, touched: {}, file: null };
 let raf = null;
 
 /* ---------- Scroll animado ---------- */
@@ -220,7 +202,7 @@ function setMenu(open) {
 
 /* ---------- Render ---------- */
 function renderStatic() {
-  $$('[data-total="vagas"]').forEach(e => e.textContent = VAGAS.length);
+  $$('[data-total="areas"]').forEach(e => e.textContent = AREAS.length);
   $$('[data-total="lojas"]').forEach(e => e.textContent = LOJAS.length);
   $$('[data-total="cidades"]').forEach(e => e.textContent = CIDADES.length);
 
@@ -240,23 +222,26 @@ function renderStatic() {
 
   $('#tagline-text').innerHTML = TAGLINE.split(' ').map(w => '<span>' + esc(w) + '</span>').join('');
 
-  $('#lista-lojas').innerHTML = CIDADES.flatMap(c => LOJAS.filter(l => l.cidade === c)).map(l => {
+  const cardLoja = l => {
     const breve = l.status === 'em breve';
     const [y, m] = l.inauguracao.split('-');
-    const n = VAGAS.filter(v => v.loja === l.nome).length;
-    const count = breve ? 'Em breve' : n ? (n === 1 ? '1 vaga' : n + ' vagas') : 'Banco de talentos';
+    const count = breve ? 'Em breve' : 'Recebendo currículos';
     const tipo = breve ? l.tipo + ' · Inaugura em ' + MESES[+m - 1] + '/' + y : l.tipo;
     const end = breve ? l.endereco : l.endereco + ', ' + l.cidade + ', SP';
     const maps = l.maps || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(l.endereco + ', ' + l.cidade + ', SP');
     return '<li class="store"><div class="store__photo"><img src="' + fotoLoja(l) + '" alt="Fachada do McDonald’s ' + esc(l.nome) + ', em ' + esc(l.cidade) + '" loading="lazy"></div>' +
-      '<div class="store__body"><div class="store__top"><div><p class="store__city">' + esc(l.cidade) + '</p><h3>' + esc(l.nome) + '</h3></div><span class="store__count">' + count + '</span></div>' +
+      '<div class="store__body"><div class="store__top"><div><h4>' + esc(l.nome) + '</h4></div><span class="store__count">' + count + '</span></div>' +
       '<span class="tag">' + esc(tipo) + '</span><p class="store__addr">' + esc(end) + '</p>' +
-      '<div class="store__actions"><button type="button" class="btn btn--outline btn--sm" data-filtrar="' + esc(l.cidade) + '">Ver vagas</button>' +
+      '<div class="store__actions"><button type="button" class="btn btn--outline btn--sm" data-cadastrar="' + regiaoDe(l.cidade) + '" aria-label="Cadastrar currículo para ' + esc(l.nome) + ', ' + esc(l.cidade) + '">Cadastrar currículo</button>' +
       (breve ? '' : '<a href="' + maps + '" target="_blank" rel="noopener">Ver no mapa</a>') + '</div></div></li>';
+  };
+  $('#lista-lojas').innerHTML = CIDADES.map(c => {
+    const ls = LOJAS.filter(l => l.cidade === c);
+    if (!ls.length) return '';
+    const id = 'cidade-' + c.toLowerCase().normalize('NFD').replace(/[^a-z]+/g, '-');
+    return '<section class="city-group" aria-labelledby="' + id + '"><div class="city-group__head"><h3 id="' + id + '">' + esc(c) + '</h3><span>' + (ls.length === 1 ? '1 loja' : ls.length + ' lojas') + ' · ' + regiaoLabel(regiaoDe(c)) + '</span></div><ul class="plain stores">' + ls.map(cardLoja).join('') + '</ul></section>';
   }).join('');
 
-  $('#filtro-cidade').innerHTML = '<option value="">Todas as cidades</option>' + CIDADES.map(c => '<option>' + esc(c) + '</option>').join('');
-  $('#chips-area').innerHTML = [{ id: '', label: 'Todas' }, ...AREAS].map(a => '<button type="button" class="chip" data-area="' + a.id + '" aria-pressed="' + (a.id === '') + '">' + esc(a.label) + '</button>').join('');
 
   $('#lista-processo').innerHTML = PROCESSO.map((p, i) =>
     '<li class="step"><div class="step__num"><b aria-hidden="true">' + (i + 1) + '</b><i aria-hidden="true"></i></div><div class="step__text"><h3><span class="sr-only">Etapa ' + (i + 1) + ': </span>' + esc(p.titulo) + '</h3><p>' + esc(p.texto) + '</p><span class="step__time"><i class="ph ph-timer" aria-hidden="true"></i>' + esc(p.prazo) + '</span></div></li>').join('');
@@ -269,35 +254,9 @@ function renderStatic() {
 
   $('#lista-redes').innerHTML = CONFIG.socials.map(s => '<li><a href="' + s.url + '" target="_blank" rel="noopener" aria-label="' + esc(s.label) + '"><i class="ph ' + s.icon + '" aria-hidden="true"></i></a></li>').join('');
 
-  $('#f-cidade').innerHTML = '<option value="">Selecione</option>' + CIDADES.map(c => '<option>' + esc(c) + '</option>').join('');
-  $('#f-vaga').innerHTML = vagaOpts().map(o => '<option value="' + o.value + '">' + esc(o.label) + '</option>').join('');
+  $('#f-regiao').innerHTML = '<option value="">Selecione</option>' + REGIOES.map(r => '<option value="' + r.id + '">' + esc(r.label) + '</option>').join('');
+  $('#f-area').innerHTML = '<option value="">Selecione</option>' + AREAS.map(a => '<option value="' + a.id + '">' + esc(a.label) + '</option>').join('') + '<option value="qualquer">Qualquer área</option>';
   $('#f-nascimento').max = new Date().toISOString().slice(0, 10);
-  $('#disp-opcoes').innerHTML = DISPONIBILIDADE.map((o, i) => '<label class="check-chip" for="f-disp-' + i + '"><input id="f-disp-' + i + '" type="checkbox" name="disp" value="' + o.id + '">' + esc(o.label) + '</label>').join('');
-}
-
-function vagaOpts() {
-  return [{ value: '', label: 'Selecione' },
-    ...VAGAS.map(v => ({ value: v.id, label: v.titulo + ' · ' + v.cidade })),
-    ...AREAS.map(a => ({ value: 'banco-' + a.id, label: 'Banco de talentos · ' + a.label }))];
-}
-
-function renderVagas() {
-  const lista = VAGAS.filter(v => (!state.filtroCidade || v.cidade === state.filtroCidade) && (!state.filtroArea || v.area === state.filtroArea))
-    .sort((a, b) => b.data.localeCompare(a.data));
-  $('#filtro-cidade').value = state.filtroCidade;
-  $$('#chips-area .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.area === state.filtroArea));
-  $('#vagas-count').textContent = lista.length === 1 ? '1 vaga encontrada' : lista.length + ' vagas encontradas';
-  $('#lista-vagas').hidden = !lista.length;
-  $('#vagas-vazio').hidden = !!lista.length;
-  $('#vagas-vazio-titulo').textContent = state.filtroCidade ? 'Nenhuma vaga com esse filtro em ' + state.filtroCidade + ' agora' : 'Nenhuma vaga com esse filtro agora';
-  $('#lista-vagas').innerHTML = lista.map(v => {
-    const foto = v.foto || fotoLoja(lojaDe(v.loja));
-    return '<li class="job"><div class="job__photo"><img src="' + foto + '" alt="Fachada do McDonald’s ' + esc(v.loja) + ', em ' + esc(v.cidade) + '" loading="lazy"></div>' +
-      '<div class="job__body"><div class="job__meta"><span class="job__area">' + esc(areaLabel(v.area)) + '</span><span class="job__date">Publicada em ' + fmtData(v.data) + '</span></div>' +
-      '<div><h3>' + esc(v.titulo) + '</h3><p class="job__desc">' + esc(v.descricao) + '</p></div>' +
-      '<ul class="plain job__info"><li><i class="ph ph-map-pin" aria-hidden="true"></i>' + esc(v.loja) + ' · ' + esc(v.cidade) + '</li><li><i class="ph ph-clock" aria-hidden="true"></i>' + esc(v.turno) + '</li><li><i class="ph ph-briefcase" aria-hidden="true"></i>' + esc(v.regime) + '</li></ul>' +
-      '<button type="button" class="btn btn--yellow" data-aplicar="' + v.id + '" aria-label="Quero a vaga de ' + esc(v.titulo) + ' em ' + esc(v.cidade) + '">Quero esta vaga</button></div></li>';
-  }).join('');
 }
 
 /* ---------- Formulário ---------- */
@@ -307,7 +266,7 @@ function lerForm() {
   return {
     nome: g('nome'), nascimento: g('nascimento'), whatsapp: g('whatsapp'), recado: g('recado'), recadoNome: g('recadoNome'),
     email: g('email'), cep: g('cep'), cidade: g('cidade'), bairro: g('bairro'), rua: g('rua'), numero: g('numero'), complemento: g('complemento'),
-    vaga: g('vaga'), disp: $$('input[name="disp"]:checked', f).map(i => i.value), lgpd: f.elements.lgpd.checked
+    regiao: g('regiao'), area: g('area'), lgpd: f.elements.lgpd.checked
   };
 }
 function mostrarErros() {
@@ -337,8 +296,9 @@ async function buscarCep(cep) {
     const cid = CIDADES.find(c => c.localeCompare(r.localidade, 'pt', { sensitivity: 'base' }) === 0);
     if (r.logradouro) f.elements.rua.value = r.logradouro;
     if (r.bairro) f.elements.bairro.value = r.bairro;
-    if (cid) f.elements.cidade.value = cid;
-    msg.textContent = cid ? 'Endereço preenchido. Confira e complete o número.' : 'CEP de ' + r.localidade + '. Escolha a cidade mais próxima.';
+    if (r.localidade) f.elements.cidade.value = r.localidade;
+    if (cid && !f.elements.regiao.value) f.elements.regiao.value = regiaoDe(cid);
+    msg.textContent = 'Endereço preenchido. Confira e complete o número.';
     mostrarErros();
   } catch (_) { msg.textContent = 'Não achamos esse CEP. Preencha o endereço manualmente.'; }
 }
@@ -359,19 +319,18 @@ async function enviar(ev) {
   const errs = mostrarErros();
   const first = ORDER.find(k => errs[k]);
   if (first) {
-    const id = first === 'disp' ? 'f-disp-0' : 'f-' + first;
+    const id = 'f-' + first;
     document.getElementById(id)?.focus();
     return;
   }
   const btn = $('#form-enviar');
-  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Enviando candidatura…';
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Enviando cadastro…';
   $('#form-erro').hidden = true;
   const f = lerForm();
-  const vagaLabel = (vagaOpts().find(o => o.value === f.vaga) || {}).label || f.vaga;
   try {
     if (CONFIG.endpoint) {
       const fd = new FormData();
-      Object.entries({ ...f, disp: f.disp.join(', '), vaga: vagaLabel, lgpd: 'sim', origem: 'lp-trabalhe-conosco-alto-tiete' }).forEach(([k, v]) => fd.append(k, v));
+      Object.entries({ ...f, regiao: regiaoLabel(f.regiao), area: f.area === 'qualquer' ? 'Qualquer área' : areaLabel(f.area), lgpd: 'sim', origem: 'lp-trabalhe-conosco-alto-tiete' }).forEach(([k, v]) => fd.append(k, v));
       if (state.file) fd.append('curriculo', state.file);
       const r = await fetch(CONFIG.endpoint, { method: 'POST', body: fd });
       if (!r.ok) throw new Error(r.status);
@@ -380,6 +339,7 @@ async function enviar(ev) {
     }
     $('#sucesso-nome').textContent = f.nome.trim().split(/\s+/)[0] || '';
     $('#sucesso-whats').textContent = f.whatsapp;
+    $('#sucesso-cidade').textContent = regiaoLabel(f.regiao);
     $('#sucesso-protocolo').textContent = 'MC-AT-' + String(Math.floor(100000 + Math.random() * 899999));
     form().hidden = true;
     $('#sucesso').hidden = false;
@@ -387,7 +347,7 @@ async function enviar(ev) {
   } catch (_) {
     $('#form-erro').hidden = false;
   } finally {
-    btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Enviar candidatura';
+    btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Cadastrar currículo';
   }
 }
 function resetForm() {
@@ -416,15 +376,10 @@ function bind() {
         return;
       }
     }
-    const fil = t.closest('[data-filtrar]');
-    if (fil) { state.filtroCidade = fil.dataset.filtrar; state.filtroArea = ''; renderVagas(); goTo('vagas'); return; }
-    const chip = t.closest('[data-area]');
-    if (chip) { state.filtroArea = chip.dataset.area; renderVagas(); return; }
-    const ap = t.closest('[data-aplicar]');
-    if (ap) {
-      const v = VAGAS.find(x => x.id === ap.dataset.aplicar);
-      form().elements.vaga.value = v.id;
-      if (!form().elements.cidade.value) form().elements.cidade.value = v.cidade;
+    const cad = t.closest('[data-cadastrar]');
+    if (cad) {
+      form().elements.regiao.value = cad.dataset.cadastrar;
+      mostrarErros();
       goTo('candidatura');
       setTimeout(() => $('#f-nome').focus({ preventScroll: true }), 700);
       return;
@@ -442,8 +397,6 @@ function bind() {
   matchMedia('(min-width: 960px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
   ['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, stopScroll, { passive: true }));
 
-  $('#filtro-cidade').addEventListener('change', e => { state.filtroCidade = e.target.value; renderVagas(); });
-  $('#limpar-filtros').addEventListener('click', () => { state.filtroCidade = ''; state.filtroArea = ''; renderVagas(); });
 
   const f = form();
   f.addEventListener('submit', enviar);
@@ -451,7 +404,6 @@ function bind() {
     const t = e.target;
     if (t.dataset.mask === 'phone') t.value = maskPhone(t.value);
     if (t.name === 'cep') { t.value = maskCep(t.value); buscarCep(t.value); }
-    if (t.name === 'disp') state.touched.disp = true;
     if (t.name === 'lgpd') state.touched.lgpd = true;
     $('#form-erro').hidden = true;
     mostrarErros();
@@ -501,27 +453,7 @@ function effects() {
   onScroll();
 }
 
-/* ---------- SEO: JSON-LD JobPosting ---------- */
-function jsonLd() {
-  const s = document.createElement('script');
-  s.type = 'application/ld+json';
-  s.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@graph': VAGAS.map(v => ({
-      '@type': 'JobPosting', title: v.titulo, description: v.descricao, datePosted: v.data,
-      validThrough: new Date(new Date(v.data).getTime() + 45 * 864e5).toISOString().slice(0, 10),
-      employmentType: v.area === 'aprendiz' ? 'INTERN' : (/Meio|Intermitente/.test(v.regime) ? 'PART_TIME' : 'FULL_TIME'),
-      hiringOrganization: { '@type': 'Organization', name: CONFIG.empresaSchema, sameAs: 'https://www.mcdonalds.com.br' },
-      jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: v.cidade, addressRegion: 'SP', addressCountry: 'BR' } },
-      directApply: true
-    }))
-  });
-  document.head.appendChild(s);
-}
-
 renderStatic();
-renderVagas();
 bind();
 effects();
-jsonLd();
 })();

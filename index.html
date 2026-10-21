@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trabalhe Conosco | McDonald’s Alto Tietê · Vagas em Mogi, Suzano e região</title>
-<meta name="description" content="Vagas no McDonald’s do Alto Tietê: atendimento, cozinha, McCafé, McDelivery, liderança e jovem aprendiz em Mogi das Cruzes, Suzano, Poá, Itaquá, Arujá e mais. Candidate-se pelo celular.">
+<title>Trabalhe Conosco | McDonald’s Alto Tietê · Cadastre seu currículo</title>
+<meta name="description" content="Cadastre seu currículo no McDonald’s do Alto Tietê: atendimento, cozinha, McCafé, McDelivery, liderança e jovem aprendiz em Mogi das Cruzes, Suzano, Poá, Itaquá, Arujá e mais. Pelo celular, em poucos minutos.">
 <link rel="icon" type="image/webp" href="assets/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
   </a>
   <nav class="nav-desk" aria-label="Seções da página"><ul class="plain" data-nav></ul></nav>
   <div class="header-actions">
-    <a class="btn btn--red header-cta" href="#candidatura">Candidate-se</a>
+    <a class="btn btn--red header-cta" href="#candidatura">Cadastrar currículo</a>
     <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="menu-mobile" aria-label="Abrir menu"><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
   </div>
 </header>
@@ -40,14 +40,14 @@
 <section class="hero" id="inicio">
   <div class="container hero__grid">
     <div class="hero__text">
-      <a class="hero__badge" href="#vagas"><strong><span data-total="vagas"></span> vagas</strong><span>abertas em <span data-total="cidades"></span> cidades da região</span></a>
+      <a class="hero__badge" href="#lojas"><strong><span data-total="lojas"></span> lojas</strong><span>recebendo currículos em <span data-total="cidades"></span> cidades</span></a>
       <h1>Comece sua carreira<br>no McDonald’s <span>perto de casa</span></h1>
       <p class="lead" style="max-width:680px">Atendimento, cozinha, McCafé, McDelivery, liderança e jovem aprendiz nas lojas do Alto Tietê. Sem experiência? A gente treina você desde o primeiro turno.</p>
       <div class="hero__ctas">
-        <a class="btn btn--yellow" href="#vagas">Ver vagas <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
-        <a class="btn btn--outline" href="#candidatura">Cadastrar currículo</a>
+        <a class="btn btn--yellow" href="#candidatura">Cadastrar currículo <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+        <a class="btn btn--outline" href="#lojas">Ver lojas</a>
       </div>
-      <p class="hero__note"><i class="ph ph-device-mobile" aria-hidden="true"></i>Candidatura pelo celular em cerca de 3 minutos</p>
+      <p class="hero__note"><i class="ph ph-device-mobile" aria-hidden="true"></i>Cadastro pelo celular em cerca de 3 minutos</p>
     </div>
     <div class="hero__media">
       <div class="hero__photo">
@@ -58,9 +58,9 @@
     </div>
   </div>
   <ul class="plain container stats" aria-label="Números da região">
-    <li><strong data-total="lojas"></strong><span>lojas contratando</span></li>
+    <li><strong data-total="lojas"></strong><span>lojas na região</span></li>
     <li><strong data-total="cidades"></strong><span>cidades com lojas</span></li>
-    <li><strong data-total="vagas"></strong><span>vagas abertas agora</span></li>
+    <li><strong data-total="areas"></strong><span>áreas para atuar</span></li>
     <li><strong>14+</strong><span>anos, com jovem aprendiz</span></li>
   </ul>
 </section>
@@ -86,40 +86,10 @@
   <div class="container stack-48">
     <div class="sec-head" data-reveal>
       <p class="eyebrow">Lojas do Alto Tietê</p>
-      <h2 class="h2">Tem um McDonald’s perto de você</h2>
-      <p class="lead">Trabalhar perto de casa economiza tempo de ônibus e deixa mais espaço para estudar.</p>
+      <h2 class="h2">Escolha a cidade onde quer trabalhar</h2>
+      <p class="lead">Seu currículo fica no banco de talentos da região escolhida. Trabalhar perto de casa economiza tempo de ônibus e deixa mais espaço para estudar.</p>
     </div>
-    <ul class="plain stores" id="lista-lojas"></ul>
-  </div>
-</section>
-
-<!-- VAGAS -->
-<section class="section" id="vagas" style="padding-top:96px">
-  <div class="container stack-32">
-    <div class="sec-head" data-reveal>
-      <p class="eyebrow">Vagas abertas</p>
-      <h2 class="h2">Escolha sua cidade e encontre seu turno</h2>
-    </div>
-    <div class="filters" role="group" aria-label="Filtrar vagas">
-      <label class="filters__city" for="filtro-cidade">Cidade
-        <select id="filtro-cidade"></select>
-      </label>
-      <div class="filters__area">
-        <span id="lbl-area">Área</span>
-        <div class="chips" role="group" aria-labelledby="lbl-area" id="chips-area"></div>
-      </div>
-    </div>
-    <p class="count" id="vagas-count" aria-live="polite"></p>
-    <ul class="plain jobs" id="lista-vagas"></ul>
-    <div class="empty" id="vagas-vazio" hidden>
-      <span class="empty__icon" aria-hidden="true"><i class="ph ph-magnifying-glass"></i></span>
-      <h3 id="vagas-vazio-titulo">Nenhuma vaga com esse filtro agora</h3>
-      <p>Cadastre seu currículo no banco de talentos. Quando abrir uma vaga com o seu perfil, o RH chama você pelo WhatsApp.</p>
-      <div class="empty__ctas">
-        <a class="btn btn--yellow" href="#candidatura">Cadastrar currículo</a>
-        <button type="button" class="btn btn--outline" id="limpar-filtros">Limpar filtros</button>
-      </div>
-    </div>
+    <div class="city-groups" id="lista-lojas"></div>
   </div>
 </section>
 
@@ -149,9 +119,9 @@
 <section class="section section--lg" id="candidatura">
   <div class="container apply">
     <div class="sec-head apply__intro" data-reveal>
-      <p class="eyebrow">Candidatura</p>
-      <h2 class="h2">Faça parte do time em poucos minutos</h2>
-      <p class="lead">Preencha seus dados e a equipe de RH entra em contato pelo WhatsApp. Currículo é opcional.</p>
+      <p class="eyebrow">Cadastro de currículo</p>
+      <h2 class="h2">Deixe seu currículo na cidade onde quer trabalhar</h2>
+      <p class="lead">Preencha seus dados e escolha a cidade. Quando abrir uma oportunidade com o seu perfil, o RH chama você pelo WhatsApp. Anexar arquivo é opcional.</p>
       <ul class="plain checks">
         <li><i class="ph ph-check-circle" aria-hidden="true"></i>Processo seletivo 100% gratuito</li>
         <li><i class="ph ph-check-circle" aria-hidden="true"></i>Não precisa de experiência</li>
@@ -215,8 +185,8 @@
         </div>
 
         <div class="field">
-          <label for="f-cidade">Cidade *</label>
-          <select class="input" id="f-cidade" name="cidade" aria-describedby="e-cidade"><option value="">Selecione</option></select>
+          <label for="f-cidade">Cidade onde mora *</label>
+          <input class="input" id="f-cidade" name="cidade" type="text" autocomplete="address-level2" aria-describedby="e-cidade">
           <p class="err" id="e-cidade"></p>
         </div>
 
@@ -238,17 +208,18 @@
           </div>
         </div>
 
-        <div class="field">
-          <label for="f-vaga">Vaga de interesse *</label>
-          <select class="input" id="f-vaga" name="vaga" aria-describedby="e-vaga"></select>
-          <p class="err" id="e-vaga"></p>
+        <div class="row">
+          <div class="field">
+            <label for="f-regiao">Escolha a região *</label>
+            <select class="input" id="f-regiao" name="regiao" aria-describedby="e-regiao"></select>
+            <p class="err" id="e-regiao"></p>
+          </div>
+          <div class="field">
+            <label for="f-area">Área de interesse *</label>
+            <select class="input" id="f-area" name="area" aria-describedby="e-area"></select>
+            <p class="err" id="e-area"></p>
+          </div>
         </div>
-
-        <fieldset class="field" aria-describedby="e-disp">
-          <legend>Disponibilidade de horário *</legend>
-          <div class="chips" id="disp-opcoes"></div>
-          <p class="err" id="e-disp"></p>
-        </fieldset>
 
         <div class="field">
           <span class="field-label">Currículo <span class="opt">(opcional · PDF ou Word até 5 MB)</span></span>
@@ -268,29 +239,29 @@
         <div class="field">
           <label class="lgpd" for="f-lgpd">
             <input id="f-lgpd" name="lgpd" type="checkbox" aria-describedby="e-lgpd">
-            <span>Autorizo o uso dos meus dados para este processo seletivo, conforme a <a href="#" data-cfg-href="privacyUrl" target="_blank" rel="noopener">Política de Privacidade</a> e a LGPD (Lei 13.709/2018). Posso pedir a exclusão a qualquer momento. *</span>
+            <span>Autorizo o uso dos meus dados para o banco de talentos e processos seletivos, conforme a <a href="#" data-cfg-href="privacyUrl" target="_blank" rel="noopener">Política de Privacidade</a> e a LGPD (Lei 13.709/2018). Posso pedir a exclusão a qualquer momento. *</span>
           </label>
           <p class="err" id="e-lgpd"></p>
         </div>
 
         <div class="alert" id="form-erro" role="alert" hidden>
           <i class="ph ph-warning-circle" aria-hidden="true"></i>
-          <span>Não conseguimos enviar sua candidatura agora. Confira sua conexão e tente de novo. Se continuar, fale com o RH pelo WhatsApp <span data-cfg="rhWhats"></span>.</span>
+          <span>Não conseguimos enviar seu cadastro agora. Confira sua conexão e tente de novo. Se continuar, fale com o RH pelo WhatsApp <span data-cfg="rhWhats"></span>.</span>
         </div>
         <p class="summary" id="form-resumo" aria-live="polite"></p>
 
-        <button type="submit" class="btn btn--red submit" id="form-enviar">Enviar candidatura</button>
+        <button type="submit" class="btn btn--red submit" id="form-enviar">Cadastrar currículo</button>
       </form>
 
       <div class="success" id="sucesso" tabindex="-1" role="status" hidden>
         <span class="success__icon" aria-hidden="true"><i class="ph ph-check"></i></span>
         <div>
-          <h3>Recebemos sua candidatura, <span id="sucesso-nome"></span>.</h3>
-          <p>O RH da loja analisa seu cadastro e chama você pelo WhatsApp <span id="sucesso-whats"></span> em até 7 dias úteis. Fique de olho nas mensagens.</p>
+          <h3>Currículo cadastrado, <span id="sucesso-nome"></span>.</h3>
+          <p>Seu cadastro está no banco de talentos de <span id="sucesso-cidade"></span>. Quando abrir uma oportunidade com o seu perfil, o RH chama você pelo WhatsApp <span id="sucesso-whats"></span>.</p>
         </div>
         <div class="protocol"><span>Número de protocolo</span><strong id="sucesso-protocolo"></strong></div>
         <p class="hint">Lembre: o McDonald’s nunca cobra taxas para participar do processo seletivo.</p>
-        <button type="button" class="btn btn--outline" id="nova-candidatura">Enviar outra candidatura</button>
+        <button type="button" class="btn btn--outline" id="nova-candidatura">Fazer outro cadastro</button>
       </div>
     </div>
   </div>
@@ -301,20 +272,20 @@
   <div class="faq-wrap stack-48">
     <div class="sec-head" data-reveal>
       <p class="eyebrow">Dúvidas frequentes</p>
-      <h2 class="h2">Perguntas antes de se candidatar</h2>
+      <h2 class="h2">Perguntas antes de se cadastrar</h2>
     </div>
     <div class="faq" id="lista-faq"></div>
   </div>
 </section>
 
 <!-- CTA FINAL -->
-<section class="section" aria-label="Candidate-se">
+<section class="section" aria-label="Cadastre seu currículo">
   <div class="cta" data-reveal>
     <div class="cta__photo"><img src="assets/cta-equipe.jpg" alt="Colaboradores do McDonald’s em uma loja do Alto Tietê" loading="lazy"></div>
     <div class="cta__text">
       <h2>Seu primeiro turno pode ser o começo de uma carreira</h2>
-      <p>Cadastro rápido, sem taxas e com retorno pelo WhatsApp.</p>
-      <a class="btn btn--yellow" href="#candidatura">Candidate-se agora <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      <p>Cadastro rápido, sem taxas e com contato pelo WhatsApp.</p>
+      <a class="btn btn--yellow" href="#candidatura">Cadastrar currículo <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
     </div>
   </div>
 </section>
